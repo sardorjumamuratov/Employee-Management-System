@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="bg-whitesmoke py-5">
-    <div class="form w-50 mx-auto px-5 py-5 bradius bg-white">
+    <form class="form w-50 mx-auto px-5 py-5 bradius bg-white" th:action="@{/login}" th:object="${employee}" method="post">
         <div class="text-center">
             <h3 class="fw-bold">Register</h3>
             <p class="my-3">Fill out this form</p>
@@ -35,6 +35,7 @@
                     id="firstName"
                     placeholder="First Name"
                     onmouseover="this.style.backgroundColor = '#ced4da'"
+                    th:field="*{firstName}"
             />
             <input
                     type="text"
@@ -42,6 +43,7 @@
                     id="lastName"
                     placeholder="Last Name"
                     onmouseover="this.style.backgroundColor = '#ced4da'"
+                    th:field="*{lastName}"
             />
         </div>
         <div class="input-group mb-3 bg-grey p-3">
@@ -54,6 +56,7 @@
                     type="text"
                     class="form-control bg-grey"
                     placeholder="Username"
+                    th:field="*{username}"
                     onmouseover="this.style.backgroundColor = '#ced4da'"/>
         </div>
         <div class="input-group mb-3 bg-grey p-3">
@@ -64,6 +67,7 @@
                     type="email"
                     class="form-control bg-grey"
                     placeholder="Email Address"
+                    th:field="*{email}"
                     onmouseover="this.style.backgroundColor = ' #ced4da'"
             />
         </div>
@@ -75,6 +79,7 @@
                     type="password"
                     class="form-control bg-grey"
                     placeholder="Password"
+                    th:field="*{password}"
                     onmouseover="this.style.backgroundColor = ' #ced4da'"
             />
         </div>
@@ -83,14 +88,15 @@
           ><i class="fa-solid fa-map-marker text-secondary"></i>
           </span>
             <input
-                    type="address"
+                    type="text"
                     class="form-control bg-grey"
                     placeholder="Address"
+                    th:field="*{address}"
                     onmouseover="this.style.backgroundColor = ' #ced4da'"
             />
         </div>
         <button class="btn btn-primary w-100 p-3">Create Account</button>
-    </div>
+    </form>
 </div>
 <script
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

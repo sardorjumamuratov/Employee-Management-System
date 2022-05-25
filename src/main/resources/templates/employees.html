@@ -23,15 +23,19 @@
         <tr>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Phone Number</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
             <th scope="col">Address</th>
             <th scope="col">Delete Users</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
+        <tr th:each="user : ${employees}">
             <td th:text="${user.getFirstName}">Mark</td>
             <td th:text="${user.getLastName()}">Otto</td>
+            <td th:text="${user.getUsername()}">Otto</td>
+            <td th:text="${user.getEmail()}">Otto</td>
             <td th:text="${user.getPassword()}">@mdo</td>
             <td th:text="${user.getAddress()}">@mdo</td>
 

@@ -4,11 +4,13 @@ import com.sendi.todoversion1.domain.Employee;
 import com.sendi.todoversion1.service.EmployeeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
 public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
@@ -17,23 +19,27 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/")
-    public String showUsers(){
-        return "users";
-    }
-
-    @GetMapping("/getusers")
+    @GetMapping(path = {"/employees", "/", ""})
     public String getUsers(Model model) {
-        Employee user = new Employee();
-
-        model.addAttribute("users", employeeService.findAll());
-
-        return "users";
+        model.addAttribute("employees", employeeService.findAll());
+        return "employees";
     }
 
-    @GetMapping("/form")
-    public String getForm () {
-        return "form";
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("employee", new Employee());
+        return "login";
     }
 
+    @PostMapping("/login")
+    public String register(@Valid Employee employee, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors() || employee == null) {
+            model.addAttribute("employee", employee);
+            return "login";
+        }
+
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+
+        return "redirect:/employees";
+    }
 }
