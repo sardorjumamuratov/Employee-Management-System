@@ -1,15 +1,13 @@
 package com.sendi.todoversion1.domain;
 
 import javax.persistence.*;
-import java.util.stream.Stream;
 
 @Entity
-@Table(name = "UserData")
-public class User extends BaseEntity {
+public class Employee extends BaseEntity {
 
     private String firstName;
     private String lastName;
-    private String phoneNumber;
+    private String password;
     private String address;
 
     public String getFirstName() {
@@ -28,12 +26,12 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPassword(String phoneNumber) {
+        this.password = phoneNumber;
     }
 
     public String getAddress() {
