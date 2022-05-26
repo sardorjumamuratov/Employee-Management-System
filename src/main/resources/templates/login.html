@@ -22,7 +22,7 @@
     <title>Registration form</title>
 </head>
 <body>
-<div class="bg-whitesmoke py-5">
+<div class="bg-grey pt-5 min-vh-100">
     <form class="form w-50 mx-auto px-5 py-5 bradius bg-white" th:action="@{/login}" th:object="${employee}" method="post">
         <div class="text-center">
             <h3 class="fw-bold">Register</h3>
@@ -95,7 +95,11 @@
                     onmouseover="this.style.backgroundColor = ' #ced4da'"
             />
         </div>
-        <button class="btn btn-primary w-100 p-3">Create Account</button>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"><button class="btn btn-primary w-100 p-3">Create Account</button></div>
+            <div class="col-4"></div>
+        </div>
     </form>
 </div>
 <script

@@ -3,6 +3,7 @@ package com.sendi.todoversion1.service;
 import com.sendi.todoversion1.domain.Employee;
 import com.sendi.todoversion1.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,5 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         return null;
+    }
+
+    @Override
+    @Transactional
+    public void deleteEmployeeById(Long id) {
+        if (id != null) {
+            employeeRepository.deleteEmployeeById(id);
+        }
     }
 }

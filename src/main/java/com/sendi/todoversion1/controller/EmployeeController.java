@@ -5,8 +5,7 @@ import com.sendi.todoversion1.service.EmployeeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,7 +19,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = {"/employees", "/", ""})
-    public String getUsers(Model model) {
+    public String getEmployees(Model model) {
         model.addAttribute("employees", employeeService.findAll());
         return "employees";
     }
@@ -40,6 +39,12 @@ public class EmployeeController {
 
         Employee savedEmployee = employeeService.saveEmployee(employee);
 
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/delete/{employeeId}")
+    public String delete(@PathVariable("employeeId") Long id) {
+        employeeService.deleteEmployeeById(id);
         return "redirect:/employees";
     }
 }
