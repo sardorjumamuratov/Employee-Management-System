@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -20,7 +21,8 @@ public class EmployeeController {
 
     @GetMapping(path = {"/employees", "/", ""})
     public String getEmployees(Model model) {
-        model.addAttribute("employees", employeeService.findAll());
+        List<Employee> employeeList = employeeService.findAll();
+        model.addAttribute("employees", employeeList);
         return "employees";
     }
 
@@ -45,6 +47,24 @@ public class EmployeeController {
     @GetMapping("/delete/{employeeId}")
     public String delete(@PathVariable("employeeId") Long id) {
         employeeService.deleteEmployeeById(id);
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/update/{employeeId}")
+    public String update(@PathVariable("employeeId") Long id, Model model) {
+        Employee employeeBeingUpdated = employeeService.findEmployeeById(id);
+        model.addAttribute("employee", employeeBeingUpdated);
+        return "updateEmployee";
+    }
+
+    @PostMapping("/update")
+    public String updateAndRedirect(@Valid Employee employee, @RequestParam("employeeId") Long id, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("employee", employeeService.findEmployeeById(id));
+            return "updateEmployee";
+        }
+
+        employeeService.updateById(id, employee);
         return "redirect:/employees";
     }
 }

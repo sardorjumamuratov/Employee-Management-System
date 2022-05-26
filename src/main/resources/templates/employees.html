@@ -27,7 +27,8 @@
             <th scope="col">Email</th>
             <th scope="col">Password</th>
             <th scope="col">Address</th>
-            <th style="border-top-right-radius: 10px;" scope="col">Delete Users</th>
+            <th scope="col">Delete</th>
+            <th style="border-top-right-radius: 10px;" scope="col">Update</th>
         </tr>
         </thead>
         <tbody>
@@ -40,11 +41,19 @@
             <td th:text="${employee.getAddress()}">@mdo</td>
             <td>
 
-                    <a href="" th:href="@{'/delete/' + ${employee.getId()}}">
+                    <a href="" th:href="@{/delete/__${employee.getId()}__}">
                         <button class="btn btn-sm btn-danger" type="submit">
                             Delete
                         </button>
                     </a>
+            </td>
+            <td>
+
+                <a href="" th:href="@{/update/__${employee.getId()}__}">
+                    <button class="btn btn-sm btn-secondary" type="submit">
+                        Update
+                    </button>
+                </a>
             </td>
         </tr>
         </tbody>

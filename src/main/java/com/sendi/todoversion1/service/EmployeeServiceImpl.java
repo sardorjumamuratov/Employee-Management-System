@@ -22,8 +22,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public Employee saveEmployee(Employee employee) {
-
         if(!employeeRepository.existsEmployeeByEmail(employee.getEmail())) {
             return employeeRepository.save(employee);
         }
@@ -38,4 +38,28 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeRepository.deleteEmployeeById(id);
         }
     }
+
+    @Override
+    @Transactional
+    public Employee findEmployeeById(Long id) {
+        if(id != null) {
+            return employeeRepository.findEmployeeById(id);
+        }
+        return new Employee();
+    }
+
+    @Override
+    @Transactional
+    public Employee updateById(Long id, Employee updatedEmployee) {
+        Employee employee = employeeRepository.findEmployeeById(id);
+        employee.setFirstName(updatedEmployee.getFirstName());
+        employee.setLastName(updatedEmployee.getLastName());
+        employee.setUsername(updatedEmployee.getUsername());
+        employee.setEmail(updatedEmployee.getEmail());
+        employee.setPassword(updatedEmployee.getPassword());
+        employee.setAddress(updatedEmployee.getAddress());
+
+        return this.saveEmployee(employee);
+    }
+
 }
